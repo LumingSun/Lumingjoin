@@ -27,13 +27,17 @@ with open("./transformed_sequence.json", "r") as f:
     sequences = json.load(f)
 # %%
 for sequence in sequences:
-    print(len(sequence))
+    for ts in sequence:
+        if(ts[3]!='None'):
+            # print(sequence)
+            print(ts[3])
+# sequences[0]
 # %%
 # collect words to construct dictionary
 words = []
 # TODO
 # complex way to get words (need to update in encoding processing) LIKE ANY 
-
+# split node type into bag
 def flatten_list(l,words):
     for each in l:
         if isinstance(each,list):
@@ -50,5 +54,15 @@ vocab = Counter(words) # create a dictionary
 vocab = sorted(vocab, key=vocab.get, reverse=True)
 vocab_size = len(vocab)
 word2idx = {word: ind for ind, word in enumerate(vocab)} 
+
+# %%
+
+# %%
+
+# %%
+
+# %%
+
+# %%
 
 # %%

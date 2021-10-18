@@ -61,6 +61,8 @@ def parse_predicates(condition_filter):
     assert len(stack) == 0
     for each in return_seq:
         pass
+    if(return_seq==[]):
+        return_seq = [["None"]]
     return return_seq
 
 
@@ -79,7 +81,7 @@ def node_embedding(node):
         keys = node["sort_keys"]
         bag = []
         for key in keys:
-            bag.extend(key.split(".")[0])
+            bag.extend(key.split("."))
         return [node_type, bag, "None", "None", "None", "None","None", cost, latency]
     elif(node_type=="Hash"):
         return [node_type, "None", "None", "None", "None", "None", "None", cost, latency]
@@ -89,6 +91,8 @@ def node_embedding(node):
         for each in condition:
             join_condition.extend(each["left_value"].split("."))
             join_condition.extend(each["right_value"].split("."))
+        if(join_condition==[]):
+            join_condition="None"
         return [node_type, "None", join_condition, "None", "None", "None", "None", cost, latency]
     elif(node_type=="Seq Scan"):
         parsed_predicates = parse_predicates(node["condition_filter"])
